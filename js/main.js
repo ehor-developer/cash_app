@@ -13,7 +13,7 @@ function getProductList() {
         var cookie = cookies[i].trim();
         var cookieParts = cookie.split("=");
         var productName = decodeURIComponent(cookieParts[0]); // デコードする
-        var productPrice = decodeURIComponent(cookieParts[1]); // デコードする
+        var productPrice = cookieParts[1]; // デコードする
         var product = {
             name: productName,
             price: productPrice
@@ -193,7 +193,7 @@ function start() {
                 </div>
                 <div class="gap-3 items-center text-right">
                     <button class="bg-green-500 text-white rounded-md py-1 px-3 hover:bg-red-600 duration-500 text-right my-2" onclick="addToCart(${i})">追加</button>
-                    <button class="bg-red-500 text-white rounded-md py-1 px-3 hover:bg-red-600 duration-500 text-right my-2" onclick="deleteProductCookie('${product.name}')">削除</button>
+                    <button class="bg-red-500 text-white rounded-md py-1 px-3 hover:bg-red-600 duration-500 text-right my-2" onclick="deleteProductCookie('${encodeURIComponent(product.name)}')">削除</button>
                 </div>
             </div>
         </div>
