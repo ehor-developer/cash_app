@@ -175,10 +175,11 @@ function start() {
     var products = getProductList();
     // 合計料金を保持する変数
     totalPrice = 0;
-    // 購入済み商品を削除
-    var buyContainer = document.getElementById("buy-container");
-    buyContainer.innerHTML = "";
 
+    console.log(products)
+    // HTMLにテンプレートを削除
+    var container = document.getElementById("product-container");
+    container.innerHTML = "";
     // 商品情報をHTMLにテンプレートとして適用
     for (var i = 0; i < products.length; i++) {
         var product = products[i];
@@ -197,8 +198,7 @@ function start() {
             </div>
         </div>
         `;
-        // HTMLにテンプレートを追加
-        var container = document.getElementById("product-container");
+
         container.innerHTML += template;
     }
 }
