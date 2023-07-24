@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 m-6">
+    <div class="space-y-2 py-14 font-semibold mb-8 text-center md:py-24 bg-gray-800">
+        <h1 class="text-green-400 text-5xl md:text-4xl" id="text"></h1>
+        <h1 class="text-green-400 text-5xl md:text-6xl" id="price"></h1>
+    </div>
+    <h2 class="text-xl font-bold my-3">🛒現在の会計</h2>
+    <div id="buy-container">
+    </div>
+    </div>
+    <div class="text-right h-full">
+        <input type="number" placeholder="受け取った金額を入力"
+            class="bg-transparent outline-none rounded-md bg-white p-2 border-2 border-gray-500 w-50 m-1" value=""
+            id="oturi">円
+        <button
+            class="bg-blue-500 text-white rounded-md text-center hover:bg-blue-600 duration-500 my-1 h-full p-1 w-20 p-2"
+            onclick="cash()">会計</button>
+    </div>
+    <h2 class="text-xl font-bold my-3">📦商品一覧</h2>
+    <details class="bg-white rounded-lg shadow-lg p-4 mb-4">
+        <summary class="text-1xl font-bold">商品登録</summary>
+        <div class="gap-2 items-center text-right space-y-3">
+            <input type="text" id="productName" placeholder="商品例）商品A"
+                class="bg-transparent outline-none rounded-md bg-white p-2 border-2 border-gray-500 w-full" value="">
+            <input class="bg-transparent outline-none rounded-md bg-white p-2 border-2 border-gray-500 w-40"
+                id="productPrice" type="number" placeholder="値段例）300">
+        </div>
+        <button class="bg-blue-500 text-white rounded-md py-1 px-3 hover:bg-blue-600 duration-500 text-right my-2"
+            onclick="setProductInfo()">追加</button>
+        </div>
+    </details>
+    <div id="product-container">
+    </div>
+</body>
+
+</html>
+<script src="js/main.js"></script>
