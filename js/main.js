@@ -97,6 +97,7 @@ function removeFromCart(button, index) {
 
 // 購入処理の関数
 function cash() {
+    var cartItems = [];
     var oturiInput = document.getElementById("oturi");
     var oturi = parseInt(oturiInput.value);
     // 購入済み商品を削除
