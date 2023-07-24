@@ -1,18 +1,19 @@
-// Function to set a cookie with an expiration date one year from now
+// 有効期限ありのCookie保存
 function setCookieWithOneYearExpiration(name, value) {
     var expirationDate = new Date();
     expirationDate.setFullYear(expirationDate.getFullYear() + 1);
-    document.cookie = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/;`;
+    document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/;`;
 }
 
+// 商品情報をCookieから取得する関数（デコードする）
 function getProductList() {
     var cookies = document.cookie.split(";");
     var productList = [];
     for (var i = 0; i < cookies.length; i++) {
         var cookie = cookies[i].trim();
         var cookieParts = cookie.split("=");
-        var productName = cookieParts[0];
-        var productPrice = cookieParts[1];
+        var productName = decodeURIComponent(cookieParts[0]); // デコードする
+        var productPrice = decodeURIComponent(cookieParts[1]); // デコードする
         var product = {
             name: productName,
             price: productPrice
@@ -27,7 +28,6 @@ function getProductList() {
     }
     return productList;
 }
-
 
 // Cookieから商品情報を削除する関数
 function deleteProductCookie(productName) {
@@ -122,25 +122,26 @@ function cash() {
             // Update the start() function to re-render the product list
             start();
         } else {
+            totalPrice = 0;
+            cartItems = [];
+            start()
             // お釣りがマイナス（不足）の場合、エラーを表示
             var changeElement = document.getElementById("text");
             changeElement.textContent = "エラー: お金が足りません";
         }
     }
 }
-
 // 商品情報をCookieに保存する関数
 function updateProductCookie() {
     var cookieValue = "";
     for (var i = 0; i < cartItems.length; i++) {
         var product = cartItems[i];
-        var productInfo = product.name + "=" + product.price;
+        var productInfo = `${encodeURIComponent(product.name)}=${encodeURIComponent(product.price)}`;
         cookieValue += productInfo + ";";
     }
     cookieValue = cookieValue.slice(0, -1); // 最後のセミコロンを削除
     document.cookie = cookieValue;
 }
-
 // 商品情報をCookieに登録する関数
 function setProductInfo() {
     var productName = document.getElementById("productName").value;
@@ -151,7 +152,7 @@ function setProductInfo() {
         // 重複する商品名をチェック
         var isDuplicate = products.some(item => item.name === productName);
         if (!isDuplicate) {
-            // 商品情報をCookieに登録する
+            // 商品情報をCookieに登録する（URLエンコード）
             setCookieWithOneYearExpiration(productName, productPrice);
             // input欄の値をリセットする
             document.getElementById("productName").value = "";
@@ -160,7 +161,6 @@ function setProductInfo() {
     }
     window.location.reload();
 }
-
 
 // 合計料金を表示する関数
 function render() {
