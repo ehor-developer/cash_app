@@ -198,7 +198,7 @@ function start() {
         `;
         // HTMLにテンプレートを追加
         var container = document.getElementById("product-container");
-        container.innerHTML = template;
+        container.innerHTML += template;
     }
 }
 
